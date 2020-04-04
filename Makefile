@@ -5,7 +5,7 @@ HOME_DIR ?=amigo
 TEMPLATE ?=AS2
 PORT_UP ?=1700
 PORT_DOWN ?=1700
-NETWORK_SERVER ?=http:\/\/dev.ttn.iotninja.io
+NETWORK_SERVER ?=https:\/\/dev.ttn.iotninja.io
 export
 
 all: init generate 
