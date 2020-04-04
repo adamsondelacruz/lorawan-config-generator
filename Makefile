@@ -31,7 +31,7 @@ install-gw: init
 	${INFO} "Installing git..."
 	sudo apt-get install git -y
 	${INFO} "INSTALLING Gateway..."
-	cd amigo && \
+	cd ~/${HOME_DIR} && \
 	git clone https://github.com/adamsondelacruz/picoGW_packet_forwarder.git && \
 	git clone https://github.com/adamsondelacruz/picoGW_mcu.git && \
 	git clone https://github.com/adamsondelacruz/picoGW_hal.git
@@ -40,7 +40,7 @@ install-gw: init
 install-dfu:
 	${INFO} "Installing dfu..."
 	sudo apt-get install autoconf -y 
-	cd amigo && \
+	cd ~/${HOME_DIR} && \
 	git clone https://github.com/adamsondelacruz/dfu-util && \
 	cd dfu-utl && \
 	./autogen.sh && \
@@ -50,8 +50,8 @@ install-dfu:
 
 compile-hal:
 	${INFO} "Installing HAL..."
-	cd ~/amigo/picoGW_hal	&& make clean all
-	cd ~/amigo/picoGW_packet_forwarder && make clean all
+	cd ~/${HOME_DIR}/picoGW_hal	&& make clean all
+	cd ~/${HOME_DIR}/picoGW_packet_forwarder && make clean all
 	${INFO} "Done !!!"
 
 generate:
