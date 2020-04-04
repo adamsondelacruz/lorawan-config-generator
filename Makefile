@@ -64,7 +64,7 @@ generate:
 
 start:
 	${INFO} "Starting the Amigo Gateway...."
-	~/${HOME_DIR}/picoGW_packet_forwarder/lora_pkt_fwd/lora_pkt_fwd
+	cd ~/${HOME_DIR}/picoGW_packet_forwarder/lora_pkt_fwd && ./lora_pkt_fwd
 
 # Array function
 define array
