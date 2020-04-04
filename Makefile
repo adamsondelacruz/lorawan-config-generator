@@ -42,7 +42,7 @@ install-dfu:
 	sudo apt-get install autoconf -y 
 	cd ~/${HOME_DIR} && \
 	git clone https://github.com/adamsondelacruz/dfu-util && \
-	cd dfu-utl && \
+	cd dfu-util && \
 	./autogen.sh && \
 	sudo apt-get install libusb-1.0-0-dev -y && \
 	./configure && make && sudo make install
@@ -61,6 +61,10 @@ generate:
 		-e 's/{{PORT_UP}}/${PORT_UP}/' \
 		-e 's/{{PORT_DOWN}}/${PORT_DOWN}/' <templates/frequency_plan/${TEMPLATE}-global_conf.json>~/${HOME_DIR}/global_conf.json
 	${INFO} "Done !!!"
+
+start:
+	${INFO} "Starting the Amigo Gateway...."
+	~/${HOME_DIR}/picoGW_packet_forwarder/lora_pkt_fwd/lora_pkt_fwd
 
 # Array function
 define array
