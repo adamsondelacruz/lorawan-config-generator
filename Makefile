@@ -59,7 +59,7 @@ generate:
 	mkdir -p ~/${HOME_DIR}
 	sed -e 's/{{NETWORK_SERVER}}/${NETWORK_SERVER}/' \
 		-e 's/{{PORT_UP}}/${PORT_UP}/' \
-		-e 's/{{PORT_DOWN}}/${PORT_DOWN}/' <templates/frequency_plan/${TEMPLATE}-global_conf.json>~/${HOME_DIR}/global_conf.json
+		-e 's/{{PORT_DOWN}}/${PORT_DOWN}/' <templates/frequency_plan/${TEMPLATE}-global_conf.json>~/${HOME_DIR}/picoGW_packet_forwarder/lora_pkt_fwd/global_conf.json
 	${INFO} "Done !!!"
 
 start:
