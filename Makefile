@@ -8,28 +8,16 @@ PORT_DOWN ?=1700
 NETWORK_SERVER ?=dev.ttn.iotninja.io
 export
 
-all: init generate 
+all: install-gw install-dfu compile-hal generate
+	${INFO} "Done !!! Amigo Gateway is now ready..."	
 
 init:
 	${INFO} "Creating Home Directory ${HOME_DIR}"
 	mkdir -p ~/${HOME_DIR}	
 
-install-python3:
-	wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tar.xz
-	tar xf Python-3.7.7.tar.xz
-	cd Python-3.7.7
-	./configure --enable-optimizations && \
-	make -j -l 4 && \
-	sudo make altinstall
-	echo alias python3='python3.7' >> ~/.bashrc
-	curl -O https://bootstrap.pypa.io/get-pip.py
-	sudo python3.7 get-pip.py
-
 install-gw: init
 	${INFO} "Updating package..."
 	sudo apt-get update -y
-	${INFO} "Installing git..."
-	sudo apt-get install git -y
 	${INFO} "INSTALLING Gateway..."
 	cd ~/${HOME_DIR} && \
 	git clone https://github.com/adamsondelacruz/picoGW_packet_forwarder.git && \
