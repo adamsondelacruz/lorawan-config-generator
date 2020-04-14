@@ -49,4 +49,4 @@ Personal Email   : adamson.delacruz@gmail.com
 
 ```
 [LICENSE]: ./LICENSE.md
-[version-badge]: https://img.shields.io/badge/amigo-usb-red.svg
+[version-badge]: https://img.shields.io/badge/amigo-0.0.1-red.svg
