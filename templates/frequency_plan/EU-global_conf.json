@@ -199,6 +199,7 @@
 		}
 	},
 	"gateway_conf": {
+		"gateway_ID": "{{GATEWAY_ID}}",
 		"server_address": "{{NETWORK_SERVER}}",
 		"serv_port_up": {{PORT_UP}},
 		"serv_port_down": {{PORT_DOWN}},

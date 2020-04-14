@@ -6,13 +6,15 @@ TEMPLATE ?=AS2
 PORT_UP ?=1700
 PORT_DOWN ?=1700
 NETWORK_SERVER ?=dev.ttn.iotninja.io
+FILE_EXISTS := $(or $(and $(wildcard ~/$(HOME_DIR)/.gatewayid),1),0)
+GATEWAY_ID ?=0000000000000000
 export
 
 all: install-gw install-dfu compile-hal generate
 	${INFO} "Done !!! Amigo Gateway is now ready..."	
 
 init:
-	${INFO} "Creating Home Directory ${HOME_DIR}"
+	${INFO} "Creating Home Directory ~/${HOME_DIR}"
 	mkdir -p ~/${HOME_DIR}	
 
 install-gw: init
@@ -42,12 +44,25 @@ compile-hal:
 	cd ~/${HOME_DIR}/picoGW_packet_forwarder && make clean all
 	${INFO} "Done !!!"
 
-generate:
+gateway-id:
+	${INFO} "Getting gatewayId ~/${HOME_DIR}"	
+ifeq ($(FILE_EXISTS), 1)
+	@cat ~/${HOME_DIR}/.gatewayid
+else
+	cd ~/${HOME_DIR}/picoGW_hal/util_chip_id && \
+	./util_chip_id -d /dev/ttyACM0 > ~/${HOME_DIR}/.gatewayid
+endif
+	$(eval GATEWAY_ID=$(shell cat ~/${HOME_DIR}/.gatewayid))
+	
+generate: gateway-id
 	${INFO} "Generating global_conf.json"
 	mkdir -p ~/${HOME_DIR}
 	sed -e 's/{{NETWORK_SERVER}}/${NETWORK_SERVER}/' \
 		-e 's/{{PORT_UP}}/${PORT_UP}/' \
+		-e 's/{{GATEWAY_ID}}/${GATEWAY_ID}/' \
 		-e 's/{{PORT_DOWN}}/${PORT_DOWN}/' <templates/frequency_plan/${TEMPLATE}-global_conf.json>~/${HOME_DIR}/picoGW_packet_forwarder/lora_pkt_fwd/global_conf.json
+		# -e 's/{{PORT_DOWN}}/${PORT_DOWN}/' <templates/frequency_plan/${TEMPLATE}-global_conf.json>~/${HOME_DIR}/global_conf.json
+		
 	${INFO} "Done !!!"
 
 start:
