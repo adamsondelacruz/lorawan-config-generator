@@ -48,3 +48,5 @@ Work Email       : adam@theiotninja.com
 Personal Email   : adamson.delacruz@gmail.com
 
 ```
+[LICENSE]: ./LICENSE.md
+[version-badge]: https://img.shields.io/badge/amigo-usb-red.svg
